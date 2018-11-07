@@ -21,5 +21,5 @@ trainingSet = stockList[2:]
 
 if __name__ == '__main__':
     # Just and example call to get Microsoft stock data
-    res = sr.getStockData('MSFT', full=True)
-    print(res)
+    res = sr.getStockData('MSFT')
+    print(res['data'][0])
