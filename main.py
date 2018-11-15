@@ -15,11 +15,9 @@ stockList = [
     'XEROX'     # Xerox
 ]
 
-# Creating the training and testing sets
-testingSet = stockList[:2]
-trainingSet = stockList[2:]
-
 if __name__ == '__main__':
     # Just and example call to get Microsoft stock data
-    res = sr.getStockData('MSFT')
-    print(res['data'][0])
+    res = sr.getStockMetaData('AAPL')
+    print(res)
+    res = sr.getStockRawData('AAPL')
+    print(res)
