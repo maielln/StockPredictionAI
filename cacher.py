@@ -10,6 +10,7 @@ META_EXTENSION = '_META.json'
 MAX_CACHE_AGE = 60 * 60 * 24  # One day
 
 def cacheRawData (ticker, res):
+    createCache()
     filePath = CACHE_LOCATION + ticker + RAW_EXTENSION
     f = open(filePath, 'w')
     f.write(json.dumps(res))
@@ -17,6 +18,7 @@ def cacheRawData (ticker, res):
     print('File [' + filePath + '] has been cached')
 
 def cacheMetaData (ticker, res):
+    createCache()
     filePath = CACHE_LOCATION + ticker + META_EXTENSION
     f = open(filePath, 'w')
     f.write(json.dumps(res))
@@ -24,6 +26,7 @@ def cacheMetaData (ticker, res):
     print('File [' + filePath + '] has been cached')
 
 def retrieveRaw (ticker):
+    createCache()
     data = None
     path = CACHE_LOCATION + ticker + RAW_EXTENSION
     if osPath.isfile(path) and os.stat(path).st_mtime > time.time() - MAX_CACHE_AGE:
@@ -33,6 +36,7 @@ def retrieveRaw (ticker):
     return data
 
 def retrieveMeta (ticker):
+    createCache()
     data = None
     path = CACHE_LOCATION + ticker + META_EXTENSION
     if osPath.isfile(path) and os.stat(path).st_mtime > time.time() - MAX_CACHE_AGE:
@@ -40,3 +44,7 @@ def retrieveMeta (ticker):
         f = open(path, 'r')
         data = json.loads(f.read())
     return data
+
+def createCache():
+    if not os.path.isdir(CACHE_LOCATION):
+        os.mkdir(CACHE_LOCATION)
