@@ -1,5 +1,5 @@
-import alphaVantageConnector as av
-import cacher
+import retrieving.alphaVantageRetriever as av
+import retrieving.cacher as cacher
 
 def getStockRawData (ticker):
     data = cacher.retrieveRaw(ticker)
