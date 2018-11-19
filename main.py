@@ -25,9 +25,9 @@ args = parser.parse_args()
 def getStockData (ticker): 
     # Just and example call to get Microsoft stock data
     res = sr.getStockMetaData(ticker)
-    #print(res)
+    print(res)
     res = sr.getStockRawData(ticker)
-    #print(res)
+    print(res)
 
 def predict (ticker, time):
     print('Predicting ' + ticker + ' for ' + str(time) + ' days in the future')
