@@ -1,6 +1,7 @@
 import retrieving.alphaVantageRetriever as av
 import retrieving.cacher as cacher
 
+# Gets the raw stock data (open, hi, low, close, volume)
 def getStockRawData (ticker):
     data = cacher.retrieveRaw(ticker)
     if data == None:
@@ -8,6 +9,7 @@ def getStockRawData (ticker):
         data = av.getStockRawData(ticker)
     return data
 
+# Gets the indicator values (SMA, EMA, MACD, RSI, BBANDS)
 def getStockMetaData (ticker):
     data = cacher.retrieveMeta(ticker)
     if data == None:

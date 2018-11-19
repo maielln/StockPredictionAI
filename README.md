@@ -9,13 +9,26 @@ The following pip packages are required:
 - requests -> `pip install requests`
 
 ## Running
-Arguments:
-- `function` 
-    - This is the process to run (`train`/`predict`)
-- `ticker`
-    - This is the symbol to `train`/`predict` for
+There are two files that can be run in this project
 
-Options:
-- `--time`
-    - This is the time length (in days) to `train`/`predict` for 
+### Trainer
+This file is responsable for training and then saving the neural network data for use by the predictor. The trainer trains for a select group of blue chip tech stocks.
 
+Runnable with: 
+```
+python train.py [time]
+```
+
+- `time` is the time frame that you will want to predict into the future. Example) 2 would be 2 days
+
+### Predictor
+This file is responsable for the prediction of individual stocks
+
+Runnable with: 
+```
+python predictor.py [ticker] [time]
+```
+
+- `ticker` is the ticker symbol for the stock to be predicted. Example) MSFT would be for Microsoft
+
+- `time` is the time frame that you will want to predict into the future. Example) 2 would be 2 days
