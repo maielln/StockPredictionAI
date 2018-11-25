@@ -10,8 +10,8 @@ parser.add_argument('time')
 args = parser.parse_args()
 
 def predict (ticker, time):
-    stockRawData = sr.getStockRawData(ticker)
-    stockMetaData = sr.getStockMetaData(ticker)
+    stockPredictionData = sr.getStockPredictionData(ticker)
+    print(json.dumps(stockPredictionData))
     '''
     This is the method that will start all of the predicting logic.
     This method should pull all the data for the given stock and call

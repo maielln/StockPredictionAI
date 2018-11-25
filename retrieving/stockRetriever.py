@@ -17,6 +17,12 @@ def getStockMetaData (ticker):
         data = av.getStockMetaData(ticker)
     return data
 
+def getStockPredictionData (ticker):
+    data = cacher.retrievePred(ticker)
+    if data == None:
+        print('Not found in cache. Calling AlphaVantage API')
+        data = av.getStockPredData(ticker)
+    return data
 
 if __name__ == '__main__':
     results = getStockMetaData('MSFT')

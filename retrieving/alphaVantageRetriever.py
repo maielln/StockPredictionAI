@@ -23,7 +23,7 @@ def getEMA (ticker, length, addedData=None):
     res = dataFormatter.formatData(res, 'Technical Analysis: EMA', addedData)
     return res
 
-def getMACD (ticker, length, addedData=None):
+def getMACD (ticker, addedData=None):
     res = avc.retrieveMACD(ticker)
     while 'Note' in res:
         print('Waiting for API limits')
@@ -76,7 +76,34 @@ def getStockMetaData (ticker, addedData=None):
     cacher.cacheMetaData(ticker, res)
     return res
 
-# Just an example usage
-if __name__ == '__main__':
-    results = getStockMetaData('MSFT')
-    print(results[results.keys()[0]])
+def purgeFields (res, exceptions=[]):
+    for day in res:
+        deletable = []
+        for field in res[day]:
+            if not field in exceptions:
+                deletable.append(field)
+        for field in deletable:
+            del res[day][field]
+    return res
+
+def purgeIncomplete (res, fields):
+    data = {}
+    for day in res:
+        numFields = 0
+        for field in res[day]:
+            if field in fields:
+                numFields += 1
+        if numFields == len(fields):
+            data[day] = res[day]
+    return data
+
+def getStockPredData (ticker):
+    wantedFields = ['close','volume', 'MACD', 'RSI']
+    res = getStockRawData(ticker)
+    res = getMACD(ticker, addedData=res)
+    res = getRSI(ticker, 50 , addedData=res)
+    res = purgeFields(res, exceptions=wantedFields)
+    res = purgeIncomplete(res, fields=wantedFields)
+    # Cache in the file system to help limit the amount of calls to API
+    cacher.cachePredData(ticker, res)
+    return res
