@@ -16,19 +16,15 @@ This file is responsable for training and then saving the neural network data fo
 
 Runnable with: 
 ```
-python train.py [time]
+python train.py
 ```
-
-- `time` is the time frame that you will want to predict into the future. Example) 2 would be 2 days
 
 ### Predictor
 This file is responsable for the prediction of individual stocks
 
 Runnable with: 
 ```
-python predictor.py [ticker] [time]
+python predictor.py [ticker]
 ```
 
 - `ticker` is the ticker symbol for the stock to be predicted. Example) MSFT would be for Microsoft
-
-- `time` is the time frame that you will want to predict into the future. Example) 2 would be 2 days
