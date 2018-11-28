@@ -1,4 +1,5 @@
 import retrieving.stockRetriever as sr
+import retrieving.trainingDataTransformer as trans
 import argparse
 import json
 import ai.stocks as stocks
@@ -8,7 +9,7 @@ parser.add_argument('ticker')
 args = parser.parse_args()
 
 def predict (ticker):
-    stockPredictionData = sr.getStockPredictionData(ticker)
+    stockPredictionData = trans.getTrainingData(ticker)
     print(stockPredictionData)
     '''
     This is the method that will start all of the predicting logic.
