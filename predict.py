@@ -1,26 +1,25 @@
-import retrieving.stockRetriever as sr
 import retrieving.trainingDataTransformer as trans
 import argparse
 import json
 import ai.stocks as stocks
+import ai.neuralNetwork as NN
+import numpy as np
 
 parser = argparse.ArgumentParser(description='Stock Predictor')
 parser.add_argument('ticker')
+parser.add_argument('load')
 args = parser.parse_args()
 
-def predict (ticker):
-    stockPredictionData = trans.getTrainingData(ticker)
-    print(stockPredictionData)
-    '''
-    This is the method that will start all of the predicting logic.
-    This method should pull all the data for the given stock and call
-    the neural network to get the likelihood that the stock price is 
-    going to go up in value
-    '''
+def predict (ticker, load):
+    NN.NN(load)
+    current = [trans.getTrainingData(ticker)['x'][0]]
+    print(current)
+    print(NN.predict(np.array(current)))
+
 
 if __name__ == '__main__':
     print('Predicting ' + args.ticker)
     if not args.ticker in stocks.getStocks():
         print('WARM: Ticker symbol not in recommended stock list.')
         print('Stock List: ' + json.dumps(stocks.getStocks()))
-    predict(args.ticker)
+    predict(args.ticker, args.load)
