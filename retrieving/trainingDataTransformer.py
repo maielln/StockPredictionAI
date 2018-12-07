@@ -20,7 +20,7 @@ def getTrainingData (ticker):
 def getInputPoint (current, past):
     current['close'] = float(current['close'])
     current['volume'] = float(current['volume'])
-    current['RSI'] = float(current['RSI'])
+    current['RSI'] = float(current['RSI']) / 100
     current['MACD'] = float(current['MACD'])
     past['volume'] = float(past['volume'])
     past['close'] = float(past['close'])
@@ -57,6 +57,13 @@ def getOutputPoint (current, future):
         output = 1
     elif output < 0:
         output = 0
+    '''
+    For Binary outputs
+    if output > 0.5:
+        output = 1
+    else:
+        output = 0
+    '''
     point = [
         output
     ]

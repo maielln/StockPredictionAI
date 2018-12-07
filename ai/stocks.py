@@ -9,8 +9,7 @@ stockList = [
     'MSFT',     # Microsoft
     'PFE',      # Pfizer
     'RHT',      # Red Hat
-    'VZ',       # Verizon
-    'XEROX'     # Xerox
+    'VZ'        # Verizon
 ]
 
 def getStocks ():
